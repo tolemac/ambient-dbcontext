@@ -30,7 +30,7 @@ namespace Jros.AmbientDbContext.Tests
             {
                 _conn = conn;
             }
-            public TDbContext CreateDbContext<TDbContext>() where TDbContext : DbContext
+            public TDbContext CreateDbContext<TDbContext>() where TDbContext : class
             {
                 var options = new DbContextOptionsBuilder<UserManagementDbContext>()
                     .UseSqlite(_conn) // Set the connection explicitly, so it won't be closed automatically by EF
@@ -145,7 +145,7 @@ namespace Jros.AmbientDbContext.Tests
 
                 using (var parentScope = dbContextScopeFactory.Create())
                 {
-                    var parentDbContext = parentScope.DbContexts.Get<UserManagementDbContext>();
+                    var parentDbContext = parentScope.DbContexts.Get<IUserManagementDbContext>();
 
                     // Load John in the parent DbContext
                     var john = parentDbContext.Users.Find(johnSpec.Id);

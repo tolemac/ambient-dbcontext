@@ -38,7 +38,7 @@ namespace Jros.AmbientDbContext.Tests.BusinessLogicServices
 			 */
 			using (var dbContextScope = _dbContextScopeFactory.CreateReadOnly())
 			{
-				var dbContext = dbContextScope.DbContexts.Get<UserManagementDbContext>();
+				var dbContext = dbContextScope.DbContexts.Get<IUserManagementDbContext>();
 				var user = dbContext.Users.Find(userId);
 
 				if (user == null)
@@ -52,7 +52,7 @@ namespace Jros.AmbientDbContext.Tests.BusinessLogicServices
 		{
 			using (var dbContextScope = _dbContextScopeFactory.CreateReadOnly())
 			{
-				var dbContext = dbContextScope.DbContexts.Get<UserManagementDbContext>();
+				var dbContext = dbContextScope.DbContexts.Get<IUserManagementDbContext>();
 				return dbContext.Users.Where(u => userIds.Contains(u.Id)).ToList();
 			}
 		}

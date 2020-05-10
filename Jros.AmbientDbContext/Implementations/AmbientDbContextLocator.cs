@@ -7,16 +7,15 @@
  */
 
 using Jros.AmbientDbContext.Interfaces;
-using Microsoft.EntityFrameworkCore;
 
 namespace Jros.AmbientDbContext.Implementations
 {
     public class AmbientDbContextLocator : IAmbientDbContextLocator
     {
-        public TDbContext Get<TDbContext>() where TDbContext : DbContext
+        public TDbContext Get<TDbContext>() where TDbContext : class
         {
             var ambientDbContextScope = DbContextScope.GetAmbientScope();
-            return ambientDbContextScope == null ? null : ambientDbContextScope.DbContexts.Get<TDbContext>();
+            return ambientDbContextScope?.DbContexts.Get<TDbContext>();
         }
     }
 }

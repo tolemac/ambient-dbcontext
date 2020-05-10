@@ -49,7 +49,7 @@ namespace Jros.AmbientDbContext.Tests.BusinessLogicServices
 			// guaranteed to get persisted regardless of what happens after this method has completed.
 			using (var dbContextScope = _dbContextScopeFactory.Create(DbContextScopeOption.ForceCreateNew))
 			{
-				var dbContext = dbContextScope.DbContexts.Get<UserManagementDbContext>();
+				var dbContext = dbContextScope.DbContexts.Get<IUserManagementDbContext>();
 				var user = dbContext.Users.Find(userId);
 
 				if (user == null)

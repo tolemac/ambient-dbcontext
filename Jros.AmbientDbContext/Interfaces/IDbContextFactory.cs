@@ -6,8 +6,6 @@
  * of the MIT license.  See the LICENSE file for details.
  */
 
-using Microsoft.EntityFrameworkCore;
-
 namespace Jros.AmbientDbContext.Interfaces
 {
     /// <summary>
@@ -34,6 +32,6 @@ namespace Jros.AmbientDbContext.Interfaces
     /// </remarks>
     public interface IDbContextFactory
     {
-		TDbContext CreateDbContext<TDbContext>() where TDbContext : DbContext;
+		TDbContext CreateDbContext<TDbContext>() where TDbContext : class;
     }
 }

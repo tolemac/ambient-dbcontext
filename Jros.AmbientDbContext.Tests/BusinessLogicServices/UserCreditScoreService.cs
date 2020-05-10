@@ -26,7 +26,7 @@ namespace Jros.AmbientDbContext.Tests.BusinessLogicServices
 			using (var dbContextScope = _dbContextScopeFactory.Create())
 			{
 				//-- Get all users
-				var dbContext = dbContextScope.DbContexts.Get<UserManagementDbContext>();
+				var dbContext = dbContextScope.DbContexts.Get<IUserManagementDbContext>();
 				var userIds = dbContext.Users.Select(u => u.Id).Take(2).ToList();
 
 				Console.WriteLine("Found {0} users in the database. Will calculate and store their credit scores in parallel.", userIds.Count);
@@ -54,7 +54,7 @@ namespace Jros.AmbientDbContext.Tests.BusinessLogicServices
 		{
 			using (var dbContextScope = _dbContextScopeFactory.Create())
 			{
-				var dbContext = dbContextScope.DbContexts.Get<UserManagementDbContext>();
+				var dbContext = dbContextScope.DbContexts.Get<IUserManagementDbContext>();
 				var user = dbContext.Users.Find(userId);
 				if (user == null)
 					throw new ArgumentException(String.Format("Invalid userId provided: {0}. Couldn't find a User with this ID.", userId));

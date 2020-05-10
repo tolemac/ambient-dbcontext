@@ -55,7 +55,7 @@ namespace Jros.AmbientDbContext.Implementations
             _dbContextFactory = dbContextFactory;
         }
 
-        public TDbContext Get<TDbContext>() where TDbContext : DbContext
+        public TDbContext Get<TDbContext>() where TDbContext : class
         {
             if (_disposed)
                 throw new ObjectDisposedException("DbContextCollection");
@@ -66,9 +66,11 @@ namespace Jros.AmbientDbContext.Implementations
             {
                 // First time we've been asked for this particular DbContext type.
                 // Create one, cache it and start its database transaction if needed.
-                var dbContext = _dbContextFactory != null
-                    ? _dbContextFactory.CreateDbContext<TDbContext>()
-                    : Activator.CreateInstance<TDbContext>();
+                var dbContext = (_dbContextFactory != null
+                                    ? _dbContextFactory.CreateDbContext<TDbContext>()
+                                    : Activator.CreateInstance<TDbContext>()) as DbContext
+                                ?? throw new ArgumentException($"{typeof(TDbContext).Name} is not a DbContext",
+                                    nameof(requestedType));
 
                 _initializedDbContexts.Add(requestedType, dbContext);
 
