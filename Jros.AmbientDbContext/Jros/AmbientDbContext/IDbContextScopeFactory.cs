@@ -8,9 +8,8 @@
 
 using System;
 using System.Data;
-using Jros.AmbientDbContext.Enums;
 
-namespace Jros.AmbientDbContext.Interfaces
+namespace Jros.AmbientDbContext
 {
     /// <summary>
     /// Convenience methods to create a new ambient DbContextScope. This is the prefered method

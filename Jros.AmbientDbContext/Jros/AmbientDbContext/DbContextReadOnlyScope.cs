@@ -7,10 +7,9 @@
  */
 
 using System.Data;
-using Jros.AmbientDbContext.Enums;
-using Jros.AmbientDbContext.Interfaces;
+using Jros.AmbientDbContext.Collection;
 
-namespace Jros.AmbientDbContext.Implementations
+namespace Jros.AmbientDbContext
 {
     public class DbContextReadOnlyScope : IDbContextReadOnlyScope
     {

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Jros.AmbientDbContext.Interfaces;
 using Jros.AmbientDbContext.Tests.DatabaseContext;
 using Jros.AmbientDbContext.Tests.DomainModel;
 

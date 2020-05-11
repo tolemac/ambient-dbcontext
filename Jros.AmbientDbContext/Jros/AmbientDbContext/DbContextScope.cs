@@ -16,12 +16,12 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
-using Jros.AmbientDbContext.Enums;
-using Jros.AmbientDbContext.Interfaces;
+using Jros.AmbientDbContext.CallContext;
+using Jros.AmbientDbContext.Collection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
 
-namespace Jros.AmbientDbContext.Implementations
+namespace Jros.AmbientDbContext
 {
     public class DbContextScope : IDbContextScope
     {
@@ -30,7 +30,7 @@ namespace Jros.AmbientDbContext.Implementations
         private bool _completed;
         private bool _nested;
         private DbContextScope _parentScope;
-        private DbContextCollection _dbContexts;
+        private Collection.DbContextCollection _dbContexts;
 
         public IDbContextCollection DbContexts { get { return _dbContexts; } }
 
@@ -65,7 +65,7 @@ namespace Jros.AmbientDbContext.Implementations
             else
             {
                 _nested = false;
-                _dbContexts = new DbContextCollection(readOnly, isolationLevel, dbContextFactory);
+                _dbContexts = new Collection.DbContextCollection(readOnly, isolationLevel, dbContextFactory);
             }
 
             SetAmbientScope(this);

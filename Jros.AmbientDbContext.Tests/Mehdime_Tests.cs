@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Linq;
-using Jros.AmbientDbContext.Implementations;
-using Jros.AmbientDbContext.Interfaces;
 using Jros.AmbientDbContext.Tests.BusinessLogicServices;
 using Jros.AmbientDbContext.Tests.CommandModel;
 using Jros.AmbientDbContext.Tests.DatabaseContext;

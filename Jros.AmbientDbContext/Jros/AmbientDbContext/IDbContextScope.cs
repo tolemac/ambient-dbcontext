@@ -10,8 +10,9 @@ using System;
 using System.Collections;
 using System.Threading;
 using System.Threading.Tasks;
+using Jros.AmbientDbContext.Collection;
 
-namespace Jros.AmbientDbContext.Interfaces
+namespace Jros.AmbientDbContext
 {
     /// <summary>
     /// Creates and manages the DbContext instances used by this code block. 

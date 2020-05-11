@@ -8,10 +8,8 @@
 
 using System;
 using System.Data;
-using Jros.AmbientDbContext.Enums;
-using Jros.AmbientDbContext.Interfaces;
 
-namespace Jros.AmbientDbContext.Implementations
+namespace Jros.AmbientDbContext
 {
     public class DbContextScopeFactory : IDbContextScopeFactory
     {

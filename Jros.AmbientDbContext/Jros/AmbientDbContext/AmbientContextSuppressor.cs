@@ -8,7 +8,7 @@
 
 using System;
 
-namespace Jros.AmbientDbContext.Implementations
+namespace Jros.AmbientDbContext
 {
     public class AmbientContextSuppressor : IDisposable
     {

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
-using Jros.AmbientDbContext.Interfaces;
 using Jros.AmbientDbContext.Tests.DatabaseContext;
 using Jros.AmbientDbContext.Tests.DomainModel;
 using Jros.AmbientDbContext.Tests.Repositories;

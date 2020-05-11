@@ -6,9 +6,7 @@
  * of the MIT license.  See the LICENSE file for details.
  */
 
-using Jros.AmbientDbContext.Interfaces;
-
-namespace Jros.AmbientDbContext.Implementations
+namespace Jros.AmbientDbContext
 {
     public class AmbientDbContextLocator : IAmbientDbContextLocator
     {

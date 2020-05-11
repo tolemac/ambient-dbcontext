@@ -6,7 +6,7 @@
  * of the MIT license.  See the LICENSE file for details.
  */
 
-namespace Jros.AmbientDbContext.Interfaces
+namespace Jros.AmbientDbContext
 {
     /// <summary>
     /// Convenience methods to retrieve ambient DbContext instances. 

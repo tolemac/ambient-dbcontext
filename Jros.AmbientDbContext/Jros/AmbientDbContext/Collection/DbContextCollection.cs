@@ -12,11 +12,10 @@ using System.Data;
 using System.Runtime.ExceptionServices;
 using System.Threading;
 using System.Threading.Tasks;
-using Jros.AmbientDbContext.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 
-namespace Jros.AmbientDbContext.Implementations
+namespace Jros.AmbientDbContext.Collection
 {
     /// <summary>
     /// As its name suggests, DbContextCollection maintains a collection of DbContext instances.

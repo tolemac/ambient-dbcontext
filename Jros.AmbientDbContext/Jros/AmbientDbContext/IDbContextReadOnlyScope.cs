@@ -7,8 +7,9 @@
  */
 
 using System;
+using Jros.AmbientDbContext.Collection;
 
-namespace Jros.AmbientDbContext.Interfaces
+namespace Jros.AmbientDbContext
 {
     /// <summary>
     /// A read-only DbContextScope. Refer to the comments for IDbContextScope

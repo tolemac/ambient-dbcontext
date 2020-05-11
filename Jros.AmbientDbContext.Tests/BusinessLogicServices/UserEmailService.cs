@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Jros.AmbientDbContext.Enums;
-using Jros.AmbientDbContext.Interfaces;
 using Jros.AmbientDbContext.Tests.DatabaseContext;
 using Jros.AmbientDbContext.Tests.DomainModel;
 

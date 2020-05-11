@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Jros.AmbientDbContext.Interfaces;
 using Jros.AmbientDbContext.Tests.DatabaseContext;
 
 namespace Jros.AmbientDbContext.Tests.BusinessLogicServices

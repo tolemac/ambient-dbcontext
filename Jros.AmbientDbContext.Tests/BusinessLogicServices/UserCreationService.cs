@@ -1,5 +1,4 @@
 ﻿using System;
-using Jros.AmbientDbContext.Interfaces;
 using Jros.AmbientDbContext.Tests.CommandModel;
 using Jros.AmbientDbContext.Tests.DomainModel;
 using Jros.AmbientDbContext.Tests.Repositories;
