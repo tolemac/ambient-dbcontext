@@ -7,7 +7,7 @@
  */
 
 using System.Data;
-using Jros.AmbientDbContext.Collection;
+using Jros.AmbientDbContext.Collections;
 
 namespace Jros.AmbientDbContext
 {
@@ -15,7 +15,7 @@ namespace Jros.AmbientDbContext
     {
         private DbContextScope _internalScope;
 
-        public IDbContextCollection DbContexts { get { return _internalScope.DbContexts; } }
+        public IDbContextCollection DbContexts => _internalScope.DbContexts;
 
         public DbContextReadOnlyScope(IDbContextFactory dbContextFactory = null)
             : this(joiningOption: DbContextScopeOption.JoinExisting, isolationLevel: null, dbContextFactory: dbContextFactory)

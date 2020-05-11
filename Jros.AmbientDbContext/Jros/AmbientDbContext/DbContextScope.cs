@@ -17,7 +17,7 @@ using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using Jros.AmbientDbContext.CallContext;
-using Jros.AmbientDbContext.Collection;
+using Jros.AmbientDbContext.Collections;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
 
@@ -30,7 +30,7 @@ namespace Jros.AmbientDbContext
         private bool _completed;
         private bool _nested;
         private DbContextScope _parentScope;
-        private Collection.DbContextCollection _dbContexts;
+        private DbContextCollection _dbContexts;
 
         public IDbContextCollection DbContexts { get { return _dbContexts; } }
 
@@ -65,7 +65,7 @@ namespace Jros.AmbientDbContext
             else
             {
                 _nested = false;
-                _dbContexts = new Collection.DbContextCollection(readOnly, isolationLevel, dbContextFactory);
+                _dbContexts = new DbContextCollection(readOnly, isolationLevel, dbContextFactory);
             }
 
             SetAmbientScope(this);
@@ -156,10 +156,10 @@ namespace Jros.AmbientDbContext
 
             var entityList = entities as object[] ?? entities.Cast<object>().ToArray();
 
-            foreach (var contextInCurrentScope in _dbContexts.InitializedDbContexts.Values)
+            foreach (var contextInCurrentScope in _dbContexts.InitializedDbContexts.GetDbContexts())
             {
                 var correspondingParentContext =
-                    _parentScope._dbContexts.InitializedDbContexts.Values.SingleOrDefault(parentContext => parentContext.GetType() == contextInCurrentScope.GetType());
+                    _parentScope._dbContexts.InitializedDbContexts.GetDbContexts().SingleOrDefault(parentContext => parentContext.GetType() == contextInCurrentScope.GetType());
 
                 if (correspondingParentContext == null)
                     continue; // No DbContext of this type has been created in the parent scope yet. So no need to refresh anything for this DbContext type.
@@ -216,10 +216,10 @@ namespace Jros.AmbientDbContext
 
             var entityList = entities as object[] ?? entities.Cast<object>().ToArray();
 
-            foreach (var contextInCurrentScope in _dbContexts.InitializedDbContexts.Values)
+            foreach (var contextInCurrentScope in _dbContexts.InitializedDbContexts.GetDbContexts())
             {
                 var correspondingParentContext =
-                    _parentScope._dbContexts.InitializedDbContexts.Values.SingleOrDefault(parentContext =>
+                    _parentScope._dbContexts.InitializedDbContexts.GetDbContexts().SingleOrDefault(parentContext =>
                         parentContext.GetType() == contextInCurrentScope.GetType());
 
                 if (correspondingParentContext == null)

@@ -10,7 +10,7 @@ using System;
 using System.Collections;
 using System.Threading;
 using System.Threading.Tasks;
-using Jros.AmbientDbContext.Collection;
+using Jros.AmbientDbContext.Collections;
 
 namespace Jros.AmbientDbContext
 {

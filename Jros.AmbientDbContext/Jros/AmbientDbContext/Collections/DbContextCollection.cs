@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 
-namespace Jros.AmbientDbContext.Collection
+namespace Jros.AmbientDbContext.Collections
 {
     /// <summary>
     /// As its name suggests, DbContextCollection maintains a collection of DbContext instances.
@@ -31,22 +31,22 @@ namespace Jros.AmbientDbContext.Collection
     /// </summary>
     public class DbContextCollection : IDbContextCollection
     {
-        private Dictionary<Type, DbContext> _initializedDbContexts;
-        private Dictionary<DbContext, IDbContextTransaction> _transactions; 
+        private readonly InitializedDbContextCollection _initializedDbContexts;
+        private readonly Dictionary<DbContext, IDbContextTransaction> _transactions; 
         private IsolationLevel? _isolationLevel;
         private readonly IDbContextFactory _dbContextFactory;
         private bool _disposed;
         private bool _completed;
-        private bool _readOnly;
+        private readonly bool _readOnly;
 
-        internal Dictionary<Type, DbContext> InitializedDbContexts { get { return _initializedDbContexts; } }
+        internal InitializedDbContextCollection InitializedDbContexts => _initializedDbContexts;
 
         public DbContextCollection(bool readOnly = false, IsolationLevel? isolationLevel = null, IDbContextFactory dbContextFactory = null)
         {
             _disposed = false;
             _completed = false;
 
-            _initializedDbContexts = new Dictionary<Type, DbContext>();
+            _initializedDbContexts = new InitializedDbContextCollection();
             _transactions = new Dictionary<DbContext, IDbContextTransaction>();
 
             _readOnly = readOnly;
@@ -61,17 +61,17 @@ namespace Jros.AmbientDbContext.Collection
 
             var requestedType = typeof(TDbContext);
 
-            if (!_initializedDbContexts.ContainsKey(requestedType))
+            if (_initializedDbContexts[requestedType] == null)
             {
                 // First time we've been asked for this particular DbContext type.
                 // Create one, cache it and start its database transaction if needed.
                 var dbContext = (_dbContextFactory != null
                                     ? _dbContextFactory.CreateDbContext<TDbContext>()
                                     : Activator.CreateInstance<TDbContext>()) as DbContext
-                                ?? throw new ArgumentException($"{typeof(TDbContext).Name} is not a DbContext",
+                                ?? throw new ArgumentException($"Cannot found a DbContext for type {typeof(TDbContext).Name}",
                                     nameof(requestedType));
 
-                _initializedDbContexts.Add(requestedType, dbContext);
+                _initializedDbContexts.Add(new InitializedDbContext(requestedType, dbContext));
 
                 if (_readOnly)
                 {
@@ -115,7 +115,7 @@ namespace Jros.AmbientDbContext.Collection
 
             var c = 0;
 
-            foreach (var dbContext in _initializedDbContexts.Values)
+            foreach (var dbContext in _initializedDbContexts.GetDbContexts())
             {
                 try
                 {
@@ -167,7 +167,7 @@ namespace Jros.AmbientDbContext.Collection
 
             var c = 0;
 
-            foreach (var dbContext in _initializedDbContexts.Values)
+            foreach (var dbContext in _initializedDbContexts.GetDbContexts())
             {
                 try
                 {
@@ -208,7 +208,7 @@ namespace Jros.AmbientDbContext.Collection
 
             ExceptionDispatchInfo lastError = null;
 
-            foreach (var dbContext in _initializedDbContexts.Values)
+            foreach (var dbContext in _initializedDbContexts.GetDbContexts())
             {
                 // There's no need to explicitly rollback changes in a DbContext as
                 // DbContext doesn't save any changes until its SaveChanges() method is called.
@@ -260,7 +260,7 @@ namespace Jros.AmbientDbContext.Collection
                 }
             }
 
-            foreach (var dbContext in _initializedDbContexts.Values)
+            foreach (var dbContext in _initializedDbContexts.GetDbContexts())
             {
                 try
                 {

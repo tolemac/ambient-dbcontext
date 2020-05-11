@@ -7,7 +7,7 @@
  */
 
 using System;
-using Jros.AmbientDbContext.Collection;
+using Jros.AmbientDbContext.Collections;
 
 namespace Jros.AmbientDbContext
 {

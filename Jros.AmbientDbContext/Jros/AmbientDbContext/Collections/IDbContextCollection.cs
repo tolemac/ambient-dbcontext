@@ -8,7 +8,7 @@
 
 using System;
 
-namespace Jros.AmbientDbContext.Collection
+namespace Jros.AmbientDbContext.Collections
 {
     /// <summary>
     /// Maintains a list of lazily-created DbContext instances.
